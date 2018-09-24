@@ -9,8 +9,13 @@ var t = document.querySelector('#tamano')
 var tamaño = rango.value
 t.value = rango.value
 
+var conectados = document.querySelector('.conectados')
+
 var x = "black",
 y = tamaño;
+
+var socket = io()
+
 
 rango.addEventListener('input', function(){
     y = rango.value
@@ -22,7 +27,7 @@ canvas = document.getElementById('can');
 ctx = canvas.getContext("2d");
 /* w = canvas.width;
 h = canvas.height; */
-ctx.canvas.width = window.innerWidth -15
+ctx.canvas.width = window.innerWidth - 100
 ctx.canvas.height = window.innerHeight - 150
 w = ctx.canvas.width
 h = ctx.canvas.height
@@ -40,6 +45,10 @@ canvas.addEventListener("mouseup", function (e) {
 canvas.addEventListener("mouseout", function (e) {
     findxy('out', e)
 }, false);
+
+
+
+
 }
 
 function color(obj) {
@@ -153,11 +162,27 @@ socket.on('dibujar', function(datos){
 })
 }
 
-var socket = io()
 
 socket.on('connect', function(){
     console.log('conectado')
+    socket.emit('conectado', null, function(){
+        console.log('Estoy conectado')
+    })
+
+
+    socket.on('conectado', function(d){
+        console.log(d)
+        conectados.innerHTML = ''
+
+        d.map(e =>{
+            label = document.createElement('p')
+            label.innerHTML = e.nombre
+            conectados.appendChild(label)
+        })
+
+    })
 })
 
-
-
+socket.on('disconnect', function(){
+    console.log('desconectado')
+})

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <meta http-equiv="X-UA-Compatible" content="ie=edge">
+                <link rel="stylesheet" href="css/main.css">
+                <title>Document</title>
+            </head>
+    <body onload="init()">
+        <canvas id="can" ></canvas>
+        <div>Colores</div>
+        <div class="colores">
+            <div class="color" style="background:green;" id="green" onclick="color(this)"></div>
+            <div class="color" style="background:blue;" id="blue" onclick="color(this)"></div>
+            <div class="color" style="background:red;" id="red" onclick="color(this)"></div>
+            <div class="color" style="background:yellow;" id="yellow" onclick="color(this)"></div>
+            <div class="color" style="background:orange;" id="orange" onclick="color(this)"></div>
+            <div class="color" style="background:black;" id="black" onclick="color(this)"></div>
+            <div>Eraser</div>
+            <div style="width:15px;height:15px;background:white;border:2px solid;" id="white" onclick="color(this)"></div>
+            <input id="rango" type="range" min="1" max="50" step="1" value="1">
+            <input type="text" id="tamano" readonly>
+        </div>
+        <div class="conectados">
+            <h3>En línea:</h3>
+        </div>
+        <!-- <img id="canvasimg" style="position:absolute;top:10%;left:52%;" style="display:none;"> -->
+        <!-- <input type="button" value="save" id="btn" size="30" onclick="save()" style="position:absolute;top:55%;left:10%;"> -->
+        <input type="button" value="clear" id="clr" size="23" onclick="erase()">
+
+        <script src="socket.io/socket.io.js"></script>
+        <script src="js/scripts.js"></script>
+
+    </body>
+    </html>
