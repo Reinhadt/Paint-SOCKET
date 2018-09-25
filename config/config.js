@@ -17,7 +17,15 @@ if(process.env.NODE_ENV === 'dev'){
     urlDB = process.env.MONGO_URI
 }
 
+if(process.env.NODE_ENV === 'dev'){
+    callbackURL = 'http://localhost:3000/auth/google/callback'
+}else{
+    callbackURL = process.env.CALLBACK_URL
+}
+
 process.env.URLDB = urlDB
+
+process.env.CALLBACK = callbackURL
 
 //=====================
 //GOOGLE CLIENT ID

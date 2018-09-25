@@ -7,7 +7,7 @@ html,body{
 }
 canvas{
     border: 1px solid #eee;
-    width: 85%;
+    width: 100%;
 }
 .colores{
     display: flex;

@@ -27,7 +27,7 @@ canvas = document.getElementById('can');
 ctx = canvas.getContext("2d");
 /* w = canvas.width;
 h = canvas.height; */
-ctx.canvas.width = window.innerWidth - 100
+ctx.canvas.width = window.innerWidth
 ctx.canvas.height = window.innerHeight - 150
 w = ctx.canvas.width
 h = ctx.canvas.height
@@ -165,24 +165,27 @@ socket.on('dibujar', function(datos){
 
 socket.on('connect', function(){
     console.log('conectado')
-    socket.emit('conectado', null, function(){
-        console.log('Estoy conectado')
-    })
 
-
-    socket.on('conectado', function(d){
-        console.log(d)
-        conectados.innerHTML = ''
-
-        d.map(e =>{
-            label = document.createElement('p')
-            label.innerHTML = e.nombre
-            conectados.appendChild(label)
-        })
-
+    socket.emit('conectado', null, function(d){
+        console.log("dataconectado: ", d)
     })
 })
 
 socket.on('disconnect', function(){
     console.log('desconectado')
+})
+
+socket.on('listaPersonas', function(data){
+    conectados.innerHTML = ''
+    console.log("yo primero")
+    data.map(e =>{
+        console.log(e.user.nombre)
+        label = document.createElement('p')
+        label.innerHTML = e.user.nombre
+        conectados.appendChild(label)
+    })
+})
+
+socket.on('crearMensaje', function(data){
+    console.log(data)
 })

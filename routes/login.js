@@ -1,3 +1,5 @@
+require('../config/config')
+
 const express = require('express')
 const passport = require('passport');
 const path = require('path')
@@ -11,7 +13,7 @@ let app = express()
 passport.use(new GoogleStrategy({
     clientID: '257544919474-7ufm6605pj6p1op02dft535lk9jshcbf.apps.googleusercontent.com',
     clientSecret: '2p8GXZWnxI5Z6RHlscMe2P56',
-    callbackURL: "http://localhost:3000/auth/google/callback"
+    callbackURL: process.env.CALLBACK
   },
   function(accessToken, refreshToken, profile, done) {
        Usuario.findOne({email: profile.emails[0].value}, function(err, user){
