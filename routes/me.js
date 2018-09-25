@@ -1,6 +1,5 @@
 const express = require('express')
 const path    = require('path')
-const {io} = require('../index')
 let app = express()
 
 
