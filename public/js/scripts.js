@@ -90,20 +90,25 @@ ctx.stroke();
 ctx.closePath();
 }
 
+function borrar(d){
+    ctx.clearRect(d.x, d.y, w, h);
+}
+
 function erase() {
 var m = confirm("Want to clear");
-if (m) {
+    if (m) {
 
-    socket.emit('borrar', null, function(resp){
-        console.log(resp)
-    })
-    socket.on('borrar', function(){
-        //console.log(datos)
-        ctx.clearRect(0, 0, w, h);
-        document.getElementById("canvasimg").style.display = "none";
-    })
+        socket.emit('borrar', {x:0,y:0}, function(resp){
+            console.log(resp)
+            ctx.clearRect(0, 0, w, h);
+        })
+        socket.on('borrar', function(d){
+            //console.log(datos)
+            borrar(d)
+            //document.getElementById("canvasimg").style.display = "none";
+        })
 
-}
+    }
 }
 
 function save() {

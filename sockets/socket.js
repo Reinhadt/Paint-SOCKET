@@ -42,6 +42,7 @@ io.on('connect', (client)=>{
 
     client.on('borrar', (data, callback)=>{
         //Emitir a todos los usuarios
-        io.sockets.emit('borrar')
+        io.sockets.emit('borrar', data)
+        //callback('borrado')
     })
 })
