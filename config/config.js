@@ -30,4 +30,4 @@ process.env.CALLBACK = callbackURL
 //=====================
 //GOOGLE CLIENT ID
 //=====================
-process.env.CLIENT_ID = process.env.CLIENT_ID || '257544919474-ujoetd1hg0vmruq7ia1sn6o69fu74m7p.apps.googleusercontent.com'
+process.env.CLIENT_ID = process.env.CLIENT_ID

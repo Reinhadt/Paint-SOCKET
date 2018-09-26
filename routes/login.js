@@ -11,8 +11,8 @@ let app = express()
 
 
 passport.use(new GoogleStrategy({
-    clientID: '257544919474-7ufm6605pj6p1op02dft535lk9jshcbf.apps.googleusercontent.com',
-    clientSecret: '2p8GXZWnxI5Z6RHlscMe2P56',
+    clientID: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
     callbackURL: process.env.CALLBACK
   },
   function(accessToken, refreshToken, profile, done) {

@@ -8,6 +8,7 @@ const mongoose   = require('mongoose')
 const passport = require('passport');
 const session = require("express-session")
 const http = require('http')
+require('dotenv').config()
 
 const sessionMiddleware = require('./middlewares/sessionMiddleware')
 
