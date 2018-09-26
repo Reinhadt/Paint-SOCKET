@@ -41,14 +41,6 @@ passport.use(new GoogleStrategy({
   }
 ));
 
-passport.serializeUser(function(user, done) {
-    done(null, user);
-});
-
-/*passport.deserializeUser(function(user, done) {
-    done(null, user);
-}); */
-
 app.get('/login', (req,res)=>{
     res.sendFile(path.join(__dirname, '../public', 'login.html'));
 })
@@ -62,5 +54,11 @@ app.get('/auth/google/callback',
   function(req, res) {
     res.redirect('/me');
   });
+
+passport.serializeUser(function(user, done) {
+    done(null, user);
+});
+
+
 
 module.exports = app

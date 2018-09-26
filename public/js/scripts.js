@@ -97,7 +97,7 @@ function borrar(d){
 function erase() {
 var m = confirm("Want to clear");
     if (m) {
-
+        borrar({x:0,y:0})
         socket.emit('borrar', {x:0,y:0}, function(resp){
             console.log(resp)
             ctx.clearRect(0, 0, w, h);

@@ -3,16 +3,16 @@ const passport = require('passport');
 const {Usuario} =  require('../classes/usuario')
 
 const usuario =  new Usuario()
-let usuarioDes
 
 passport.deserializeUser(function(user, done) {
-    usuarioDes = user
     done(null, user);
-
 });
 
 io.on('connect', (client)=>{
     //console.log(user)
+    console.log("Socket.request: ", client.request.session.passport.user)
+
+    let usuarioDes = client.request.session.passport.user
 
     //Escuchar evento que viene del front
     client.on('dibujar', (data, callback) =>{
@@ -28,7 +28,8 @@ io.on('connect', (client)=>{
     client.on('conectado', (data, callback)=>{
 
         let p = usuario.agregarPersona(client.id, usuarioDes)
-        io.sockets.emit('listaPersonas', usuario.getPersonas())
+        client.broadcast.emit('listaPersonas', usuario.getPersonas())
+        client.emit('listaPersonas', usuario.getPersonas())
         callback(usuario.getPersonas())
     })
 
@@ -36,13 +37,14 @@ io.on('connect', (client)=>{
         console.log("Desconectado")
         let personaBorrada = usuario.borrarPersona(client.id)
 
-        io.sockets.emit('crearMensaje', {usuario: 'Administrador', mensaje: `${personaBorrada} abandonó el chat`})
-        io.sockets.emit('listaPersonas', usuario.getPersonas())
+        client.broadcast.emit('crearMensaje', {usuario: 'Administrador', mensaje: `${personaBorrada.user.nombre} abandonó el chat`})
+        client.broadcast.emit('listaPersonas', usuario.getPersonas())
+        client.emit('listaPersonas', usuario.getPersonas())
     })
 
     client.on('borrar', (data, callback)=>{
         //Emitir a todos los usuarios
-        io.sockets.emit('borrar', data)
+        client.broadcast.emit('borrar', data)
         //callback('borrado')
     })
 })
