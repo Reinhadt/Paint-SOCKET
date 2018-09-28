@@ -7,11 +7,10 @@ const socketIO = require('socket.io')
 const mongoose   = require('mongoose')
 const passport = require('passport');
 const session = require("express-session")
-const MongoStore = require('connect-mongo')(session)
 const http = require('http')
 require('dotenv').config()
 
-const sessionMiddleware = require('./middlewares/sessionMiddleware')
+//const sessionMiddleware = require('./middlewares/sessionMiddleware')
 
 let app = express()
 let server = http.createServer(app)
@@ -26,8 +25,11 @@ app.use(sessionMiddleware)
 //Llamo passport session luego del static para que no sea instanciado muchas veces
 //esto evita que deserializeUser sea llamado múltiples veces sin necesidad
 app.use(session({
-    secret: 'cats',
-    store: new MongoStore()
+    name: "connect.sid",
+    secret: "cats",
+    store: new(require('connect-mongo')(session))({
+        url: process.env.URLDB
+    })
 }));
 app.use(passport.initialize());
 app.use(passport.session());
