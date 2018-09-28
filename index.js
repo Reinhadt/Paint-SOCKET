@@ -20,17 +20,17 @@ const publicPath = path.resolve(__dirname, './public');
 const port = process.env.PORT || 3000
 app.use(express.static(publicPath));
 
-//app.use(sessionMiddleware)
+app.use(sessionMiddleware)
 
 //Llamo passport session luego del static para que no sea instanciado muchas veces
 //esto evita que deserializeUser sea llamado múltiples veces sin necesidad
-app.use(session({
+/* app.use(session({
     name: "connect.sid",
     secret: "cats",
     store: new(require('connect-mongo')(session))({
         url: process.env.URLDB
     })
-}));
+})); */
 app.use(passport.initialize());
 app.use(passport.session());
 
