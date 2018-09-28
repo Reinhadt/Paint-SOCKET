@@ -10,7 +10,7 @@ const session = require("express-session")
 const http = require('http')
 require('dotenv').config()
 
-//const sessionMiddleware = require('./middlewares/sessionMiddleware')
+const sessionMiddleware = require('./middlewares/sessionMiddleware')
 
 let app = express()
 let server = http.createServer(app)
