@@ -7,7 +7,7 @@ const socketIO = require('socket.io')
 const mongoose   = require('mongoose')
 const passport = require('passport');
 const session = require("express-session")
-const MongoStore = requere('connect-mongo')(session)
+const MongoStore = require('connect-mongo')(session)
 const http = require('http')
 require('dotenv').config()
 
